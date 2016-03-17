@@ -1,0 +1,53 @@
+
+public class BruteFor {
+	//ATTRIBUTES
+	private Map map;
+	private int nbrTowns;
+	
+	//METHODS
+	public BruteFor(Map m, int nT){
+		this.map = m;
+		this.nbrTowns = nT;
+	}
+	
+	public Map getMap(){
+		return(this.map);
+	}
+	
+	public int getNbrTowns(){
+		return(this.nbrTowns);
+	}
+	
+	public int bruteForce(){
+		
+		int result = Integer.MAX_VALUE;
+		
+		
+		
+		return result;
+	}
+	
+	
+	/**
+	 * Recursive Function that test all the possibilities in a tab from index
+	 * Exemple: Travel = {1, 2, 3, 4, 5, 6} index = 3
+	 * 			The tested Travel will be {1, 2, 3, 4, 5, 6},  {1, 2, 3, 4, 6, 5}, {1, 2, 3, 5, 4, 6}, {1, 2, 3, 5, 6, 4},
+	 * 			{1, 2, 3, 6, 4, 5} and {1, 2, 3, 6, 5, 4} 
+	 * @param t the tested Travel
+	 * @param index the index from which we test the Travel (inclusive)
+	 * @return the minimum length of the Travel
+	 */
+	public int checkMinimum(Travel t, int index){
+		
+		int result = t.calculLength(this.map);
+		
+			//stop condition
+		if(index < t.getNbrTowns()){
+			for(int i = 0; i < (t.getNbrTowns() - index + 1); i++){
+				
+			}
+		}
+		
+		return result;
+	}
+}

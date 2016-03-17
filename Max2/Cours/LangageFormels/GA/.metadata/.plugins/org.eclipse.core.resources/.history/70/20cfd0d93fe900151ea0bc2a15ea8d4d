@@ -1,0 +1,28 @@
+
+public class GeneAlg {
+	//ATTRIBUTES
+	private Map map;
+	private Population population;
+	
+	//METHODS
+	public GeneAlg(Map m, Population p){
+		this.map = m;
+		this.population = p;
+	}
+	
+	public Map getMap(){
+		return(this.map);
+	}
+	
+	public Population getPopulation(){
+		return(this.population);
+	}
+	
+	
+	/**
+	 * Function that executes the Genetic Algorithm method
+	 */
+	public void GeneticAlgorithm(){
+		
+	}
+}

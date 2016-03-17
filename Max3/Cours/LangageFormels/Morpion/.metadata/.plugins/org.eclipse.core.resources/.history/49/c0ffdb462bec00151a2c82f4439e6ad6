@@ -1,0 +1,47 @@
+import java.util.ArrayList;
+
+
+public class Morpion {
+	//ATTRIBUTES
+	private int[][] tab;
+	
+	
+	//METHODS
+	public Morpion(){
+		this.tab = new int[3][3];
+		for(int i = 0; i < 3; i ++){
+			for(int j = 0; j < 3; j ++){
+				tab[i][j] = 0;
+			}
+		}
+	}
+	
+	public Morpion(int[][] t){
+		this.tab = t;
+	}
+	
+	public int[][] getTab(){
+		return this.tab;
+	}
+	
+	public ArrayList<int[][]> makeTree(){
+		ArrayList<int[][]> resultList = new ArrayList<int[][]>();
+		
+		
+		
+		return resultList;
+	}
+	
+	
+	public String toString(){
+		String str = this.tab[0][0] + "|" + this.tab[0][1] + "|" + this.tab[0][2];
+		str += "\n";
+		str += "-------";
+		str += this.tab[1][0] + "|" + this.tab[1][1] + "|" + this.tab[1][2];
+		str += "\n";
+		str += "-------";
+		str += this.tab[2][0] + "|" + this.tab[2][1] + "|" + this.tab[2][2];
+	
+	}
+	
+}

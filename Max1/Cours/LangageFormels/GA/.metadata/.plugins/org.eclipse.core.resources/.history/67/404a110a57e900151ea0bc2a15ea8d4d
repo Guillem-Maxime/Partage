@@ -1,0 +1,74 @@
+
+public class BruteFor {
+	//ATTRIBUTES
+	private Map map;
+	private int nbrTowns;
+	
+	//METHODS
+	public BruteFor(Map m, int nT){
+		this.map = m;
+		this.nbrTowns = nT;
+	}
+	
+	public Map getMap(){
+		return(this.map);
+	}
+	
+	public int getNbrTowns(){
+		return(this.nbrTowns);
+	}
+	
+	public long bruteForce(){
+		
+		int[] firstPath = new int[this.nbrTowns];
+		
+		for(int i = 0; i < this.nbrTowns; i ++){
+			firstPath[i] = 1;
+		}
+		
+		Travel travel = new Travel(this.nbrTowns, firstPath);
+		
+		//debug
+		System.out.println(travel);
+		
+		long result = changeTravel(travel, 0);
+		
+		System.out.println("Le resultat trouvé par BruteForce est : " + result);
+		
+		return result;
+	}
+	
+	/**
+	 * Recursive Function that will generate all the possible travels and get their length
+	 * @param t the given travel that will be changed
+	 * @param index the index from which we will change it
+	 * @return the value of the shortest travel
+	 */
+	public long changeTravel(Travel t, int index){
+		
+		long result = t.calculLength(this.map); 
+		long tempResult;
+		
+		if(index < t.getNbrTowns() - 1){
+			for(int i = 1; i <= this.nbrTowns; i ++){
+				if(!t.check(i)){
+					t.setInt(i, index);
+					tempResult = changeTravel(t, index + 1);
+					
+					//debug
+					System.out.println(t);
+					
+					if(tempResult < result){
+						result = tempResult;
+					}
+					
+					//debug
+					System.out.println(result);
+				}
+			}
+		}
+		
+		return result;
+	}
+
+}

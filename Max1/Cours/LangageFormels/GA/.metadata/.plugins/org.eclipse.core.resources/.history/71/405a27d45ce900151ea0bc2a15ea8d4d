@@ -1,0 +1,40 @@
+import java.util.ArrayList;
+
+
+public class Permutation {
+	//ATTRIBUTES
+	int[] initial;
+	ArrayList<int[]> permutList;
+	
+	//METHODS
+	public Permutation(int[] tab){
+		this.initial = tab;
+		this.permutList = permutations(tab); 
+	}
+	
+	public int[] getInitial(){
+		return(this.initial);
+	}
+	
+	public ArrayList<int[]> getPermutList(){
+		return(this.permutList);
+	}
+	
+	
+	public static ArrayList<int[]> permutations(int[] tab){
+		
+		ArrayList<int[]> resultList = new ArrayList<int[]>();
+		
+		subPermutations(tab, 0, resultList);
+		
+		return resultList;
+	}
+
+	
+	public static void subPermutations(int[] tab, int index, ArrayList<int[]> list){
+		
+		if();
+		
+	}
+	
+}

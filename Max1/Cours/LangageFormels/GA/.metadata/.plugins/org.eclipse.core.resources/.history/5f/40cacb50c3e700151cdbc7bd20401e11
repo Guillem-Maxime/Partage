@@ -1,0 +1,48 @@
+
+public class Main {
+	public static void main(String[] args){
+		
+		//INITIALIZATION 
+		int numberTowns = 100;
+		int[][] roadsLengths = new int[numberTowns][numberTowns];
+		
+		fillRoads(roadsLengths, numberTowns);
+		
+		Map map = new Map(numberTowns);
+		map.fillRoads(roadsLengths);
+		
+		int[] firstPath = new int[numberTowns];
+		
+		for(int i = 0; i < numberTowns; i++){
+			firstPath[i] = i;
+		}
+		
+		Travel initialParent = new Travel(numberTowns, firstPath);
+		
+		boolean evolution = true;
+		
+		while(evolution){ //definir les conditions d'évolution 
+			//choose parents 							: SELECTION
+			//offspring = combination(parent1,parent2) 	: CROSSOVER
+			//optimize-local(offspring) 				: MUTATION
+			//ifsuited(offspring)						:SURVIVAL OF THE FITTEST
+			//then replace optimum's searcher with most fitness by the offspring (???)
+			
+		}
+	}
+	
+	/**
+	 * Function that fill the roadsLengths tab
+	 */
+	public static void fillRoads(int[][] tab, int n){
+		for(int i = 0; i < n; i++){
+			for(int j = 0; j < n; j++){
+				tab[i][j] = ran(0,20); //trouver une methode pour randomiser
+			}
+		}
+	}
+	
+	
+	
+	
+}

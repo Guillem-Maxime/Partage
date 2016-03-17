@@ -1,0 +1,55 @@
+import java.util.Random;
+
+
+public class Population {
+	//ATTRIBUTES
+	private int people;
+	private Travel[] population;
+	
+	//METHODS
+	public Population(int p, Travel[] pop){
+		this.people = p;
+		this.population = pop;
+	}
+	
+	public int getPeople(){
+		return(this.people);
+	}
+	
+	public Travel[] getPopulation(){
+		return(this.population);
+	}
+	
+	public Travel randTr(){
+		Random rand = new Random();
+		int index = rand.nextInt();
+		return(this.population[index]);
+	}
+	
+	public Travel getTravel(int index){
+		return(this.population[index]);
+	}
+	
+	/**
+	 * returns the index of the longest route
+	 */
+	public int longestRoute(Map map){
+		
+		int result = 0;
+		
+		for(int i = 0; i < this.people; i++){
+			if(result < this.population[i].calculLength(map)){
+				result = this.population[i].calculLength(map);
+			}
+		}
+		
+		return result;
+	}
+	
+	
+	/**
+	 * Function that replace a value in the population by the given value
+	 */
+	
+	
+}

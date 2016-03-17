@@ -1,0 +1,29 @@
+import java.util.Random;
+
+
+public class Population {
+	//ATTRIBUTES
+	private int people;
+	private Travel[] population;
+	
+	//METHODS
+	public Population(int p, Travel[] pop){
+		this.people = p;
+		this.population = pop;
+	}
+	
+	public int getPeople(){
+		return(this.people);
+	}
+	
+	public Travel[] getPopulation(){
+		return(this.population);
+	}
+	
+	public Travel randTr(){
+		Random rand = new Random();
+		int a = rand.nextInt();
+		
+	}
+	
+}

@@ -1,0 +1,155 @@
+import java.util.Random;
+
+
+public class Main {
+	public static void main(String[] args){
+		
+		//INITIALIZATION 
+			//number of towns in our country
+		int numberTowns = 100;
+			//The population of travels we will take
+		int pop = 25;
+			//the lengths between the roads in our country
+		int[][] country = new int[numberTowns][numberTowns];
+			//we fill our country with random values
+		fillRoads(country, numberTowns);
+			
+			//we create a map that we fill with our country
+		Map map = new Map(numberTowns);
+		map.fillRoads(country);
+		
+			//the first path that our traveler will take
+		int[] firstPath = new int[numberTowns];
+			//we fill it stupidly
+		for(int i = 0; i < numberTowns; i++){
+			firstPath[i] = i+1;
+		}
+		
+			//and put it in a Travel
+		Travel initialParent = new Travel(numberTowns, firstPath);
+		
+			//the population is a set of Travel
+		Travel[] popul = new Travel[pop];
+			//the first population is solely composed of stupid Travels 
+		for(int j = 0; j < pop; j++){
+			popul[j] = initialParent;
+		}
+		Population population = new Population(pop, popul);
+		
+			//parents will be designed by a couple
+		Couple couple = new Couple(initialParent, initialParent);
+			
+			//the offspring which will be created on each loop (and not the punk band)
+		Travel offspring;
+		
+		
+			//we must put a condition on the stopping of the evolution process
+		boolean evolution = true;
+		
+		while(evolution){  
+				//choose parents							: SELECTION
+			couple = chooseParents(population);
+			
+				//offspring = combination(parent1,parent2) 	: CROSSOVER
+			offspring = combination(couple);
+			
+				//optimize-local(offspring) 				: MUTATION
+			optimizeLocal(offspring);
+			
+			//ifsuited(offspring)						: SURVIVAL OF THE FITTEST
+			
+			
+			//then replace optimum's searcher with most fitness by the offspring
+			
+		}
+	}
+	
+	/**
+	 * Function that fill the roadsLengths tab
+	 */
+	public static void fillRoads(int[][] tab, int n){
+		
+		Random rand = new Random();
+		int a = rand.nextInt(21) + 1;
+		if(a == 21){
+			a = Integer.MAX_VALUE;
+		}
+		
+		for(int i = 0; i < n; i++){
+			for(int j = 0; j < n; j++){
+				tab[i][j] = a; //trouver une methode pour randomiser dans values
+			}
+		}
+	}
+	
+	/**
+	 * Function that will choose a couple of parents in the population
+	 */
+	public static Couple chooseParents(Population population){
+		Travel p1;
+		Travel p2;
+		
+		//Choose p1 at random in population
+		do{
+		//Choose p2 at random in population
+		}while(p2 != p1);
+		
+		Couple couple = new Couple(p1,p2);
+		return couple;
+	}
+	
+	/**
+	 * Function that create an offspring following the chosen law
+	 */
+	public static Travel combination(Couple couple){
+		
+		int nbrT = couple.getParent1().getNbrTowns();
+		int[] path = new int[nbrT];
+		for(int i = 0; i < nbrT; i++){
+			path[i] = 0;
+		}
+		
+		int nextIndex = 0;
+		
+		Travel offspring = new Travel(nbrT, path);
+		boolean cycle = false;
+		
+		for(int j = 0; j < nbrT; j++){
+				//First of all we check if we created a cycle
+			for(int k = 0; k < nbrT; k++){
+				if(offspring.getPath()[k] != 0 && offspring.check(couple.getParent2().getElement(k))){
+					cycle = true;
+				}
+				if(cycle){break;}
+			
+					//We copy the value of Parent1 in offspring at the nextIndex
+				offspring.setInt(couple.getParent1().getElement(nextIndex),nextIndex);
+					//We change the value of nextIndex, by the corresponding index of parent2
+				nextIndex = couple.getParent1().indexOf(couple.getParent2().getElement(nextIndex));
+				
+			}
+				
+		}
+		
+		//fill the rest of offspring with parent2
+		for(int l = 0; l < nbrT; l ++){
+			if(offspring.getElement(l) == 0){
+				offspring.setInt(couple.getParent2().getElement(l), l);
+			}
+		}
+		
+		return offspring;
+	}
+
+	/**
+	 * Function that simulate random mutation
+	 */
+	public static Travel optimizeLocal(Travel t, double mutValue){
+		
+		if(/*random number*/ < mutValue){
+			
+		}
+		
+		return t;
+	}
+}

@@ -1,0 +1,28 @@
+
+public class BruteFor {
+	//ATTRIBUTES
+	private Map map;
+	private int nbrTowns;
+	
+	//METHODS
+	public BruteFor(Map m, int nT){
+		this.map = m;
+		this.nbrTowns = nT;
+	}
+	
+	public Map getMap(){
+		return(this.map);
+	}
+	
+	public int getNbrTowns(){
+		return(this.nbrTowns);
+	}
+	
+	public int bruteForce(){
+		
+		int result = Integer.MAX_VALUE;
+		
+		
+		return result;
+	}
+}

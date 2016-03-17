@@ -1,0 +1,16 @@
+
+public class Morpion {
+	//ATTRIBUTES
+	private int[] tab;
+	
+	
+	//METHODS
+	public Morpion(int[] t){
+		this.tab = t;
+	}
+	
+	public int[] getTab(){
+		return this.tab;
+	}
+	
+}

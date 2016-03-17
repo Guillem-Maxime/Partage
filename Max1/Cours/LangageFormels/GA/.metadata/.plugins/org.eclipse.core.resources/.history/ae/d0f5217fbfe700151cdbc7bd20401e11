@@ -1,0 +1,28 @@
+import java.util.Vector;
+
+
+public class Travel {
+	//ATTRIBUTES
+	private int[] path;
+	
+	//METHODES
+	public int[] getPath(){
+		return(this.path);
+	}
+	
+	public int calculLength(Map map){
+		
+		int length = 0;
+		
+		for(int i = 0; i < this.path.length() - 1; i++){
+			a = this.path[i];
+			b = this.path[i + 1];
+			
+			
+			length += 
+		}
+		
+		
+		return 0;
+	}
+}

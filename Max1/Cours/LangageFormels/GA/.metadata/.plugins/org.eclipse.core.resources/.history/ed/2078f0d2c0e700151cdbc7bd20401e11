@@ -1,0 +1,8 @@
+
+public class Map {
+	//ATTRIBUTES
+	private int nbrTowns;
+	private int[][] roads;
+	
+	
+}

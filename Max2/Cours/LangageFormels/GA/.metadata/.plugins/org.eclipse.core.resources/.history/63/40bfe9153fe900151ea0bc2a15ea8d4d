@@ -1,0 +1,12 @@
+
+public class GeneAlg {
+	//ATTRIBUTES
+	private Map map;
+	private Population population;
+	
+	//METHODS
+	public GeneAlg(Map m, Population p){
+		this.map = m;
+		this.population = p;
+	}
+}

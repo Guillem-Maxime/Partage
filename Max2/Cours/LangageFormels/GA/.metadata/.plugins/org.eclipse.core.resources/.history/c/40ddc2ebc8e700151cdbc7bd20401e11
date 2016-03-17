@@ -1,0 +1,82 @@
+
+public class Main {
+	public static void main(String[] args){
+		
+		//INITIALIZATION 
+			//number of towns in our country
+		int numberTowns = 100;
+			//The population of travels we will take
+		int pop = 25;
+			//the lengths between the roads in our country
+		int[][] country = new int[numberTowns][numberTowns];
+			//we fill our country with random values
+		fillRoads(country, numberTowns);
+			
+			//we create a map that we fill with our country
+		Map map = new Map(numberTowns);
+		map.fillRoads(country);
+		
+			//the first path that our traveler will take
+		int[] firstPath = new int[numberTowns];
+			//we fill it stupidly
+		for(int i = 0; i < numberTowns; i++){
+			firstPath[i] = i;
+		}
+		
+			//and put it in a Travel
+		Travel initialParent = new Travel(numberTowns, firstPath);
+		
+			//the population is a set of Travel
+		Travel[] population = new Travel[pop];
+			//the first population is solely composed of stupid Travels 
+		for(int j = 0; j < pop; j++){
+			population[j] = initialParent;
+		}
+		
+			//parents will be designed by a couple
+		Couple couple = new Couple(initialParent, initialParent);
+			
+			//we must put a condition on the stopping of the evolution process
+		boolean evolution = true;
+		
+		while(evolution){  
+			//choose parents							: SELECTION
+			couple = chooseParents(population);
+			//offspring = combination(parent1,parent2) 	: CROSSOVER
+			//optimize-local(offspring) 				: MUTATION
+			//ifsuited(offspring)						: SURVIVAL OF THE FITTEST
+			//then replace optimum's searcher with most fitness by the offspring
+			
+		}
+	}
+	
+	/**
+	 * Function that fill the roadsLengths tab
+	 */
+	public static void fillRoads(int[][] tab, int n){
+		
+		int[] values = new int[34];
+		
+		for(int k = 0; k < 33; k++){
+			values[k] = k;
+		}
+		values[33] = Integer.MAX_VALUE;
+		
+		
+		
+		for(int i = 0; i < n; i++){
+			for(int j = 0; j < n; j++){
+				tab[i][j] = ran(0,20); //trouver une methode pour randomiser dans values
+			}
+		}
+	}
+	
+	/**
+	 * Function that will choose a couple of parents in the population
+	 */
+	public static Couple chooseParents(Population population){
+		
+	}
+	
+	
+}

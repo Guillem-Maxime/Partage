@@ -1,0 +1,54 @@
+import java.util.ArrayList;
+
+
+public class Tree {
+	//ATTRIBUTES
+	private ArrayList<ArrayList<Morpion>> tree;
+	
+	//METHODS
+	public Tree(){
+		this.tree = new ArrayList<ArrayList<Morpion>>();
+	}
+	
+	public ArrayList<ArrayList<Morpion>> getTree(){
+		return this.tree;
+	}
+	
+	public int stepSize(int stepIndex){
+		return this.tree.get(stepIndex).size();
+	}
+	
+	public void setRoot(){
+		ArrayList<Morpion> lRoot = new ArrayList<Morpion>();
+		Morpion mRoot = new Morpion();
+		lRoot.set(0, mRoot);
+		this.tree.set(0, lRoot);
+	}
+	
+	public void makeTree(){
+		
+		this.setRoot();
+		
+		for(int i = 1; i < 7; i++){
+			for(int k = 0; k < this.stepSize(i); k ++){
+				this.tree.set(i+1, nextBranch())
+			}
+		}
+		
+	}
+	
+	public ArrayList<Morpion> nextBranch(Morpion root, int value){
+		ArrayList<Morpion> resultList = new ArrayList<Morpion>();
+		int indList = 0;
+		
+		for(int i = 0; i < 9; i ++){
+			if(root.getElem(i) == 0){
+				Morpion tmpTab = root;
+				tmpTab.setElem(value, i);
+				resultList.set(indList, tmpTab); 
+			}
+		}
+		
+		return resultList;
+	}
+}

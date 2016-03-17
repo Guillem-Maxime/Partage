@@ -1,0 +1,44 @@
+import java.util.Random;
+
+
+public class Main {
+	public static void main(String[] args){
+		
+		//INITIALIZATION 
+			//number of towns in our country
+		int numberTowns = 100;
+			//The population of travels we will take
+		int pop = 25;
+			//the value of the mutation rate
+		double mutValue = 0.7;
+			//the lengths between the roads in our country
+		int[][] country = new int[numberTowns][numberTowns];
+			//we fill our country with random values
+		fillRoads(country, numberTowns);
+			
+		
+			//we create a map that we fill with our country
+		Map map = new Map(numberTowns);
+		map.fillRoads(country);
+		
+		
+	}
+	
+	/**
+	 * Function that fill a tab with random values
+	 * @param tab the tab to fill
+	 * @param n the size of the tab (tab is a square matrix)
+	 */
+	public static void fillRoads(int[][] tab, int n){
+		
+		Random rand = new Random();
+		int a = rand.nextInt(10) + 1;
+		
+		for(int i = 0; i < n; i++){
+			for(int j = 0; j < n; j++){
+				tab[i][j] = a; 
+			}
+		}
+	}
+
+}

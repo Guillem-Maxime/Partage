@@ -1,0 +1,49 @@
+
+public class BruteFor {
+	//ATTRIBUTES
+	private Map map;
+	private int nbrTowns;
+	
+	//METHODS
+	public BruteFor(Map m, int nT){
+		this.map = m;
+		this.nbrTowns = nT;
+	}
+	
+	public Map getMap(){
+		return(this.map);
+	}
+	
+	public int getNbrTowns(){
+		return(this.nbrTowns);
+	}
+	
+	public int bruteForce(){
+		
+		int result = Integer.MAX_VALUE;
+		
+		
+		
+		return result;
+	}
+	
+	
+	/**
+	 * Recursive Function that test all the possibilities in a tab from index
+	 * Exemple: tab = {1, 2, 3, 4, 5, 6} index = 3 (n = 6)
+	 * 			The tested tab will be {1, 2, 3, 4, 5, 6},  {1, 2, 3, 4, 6, 5}, {1, 2, 3, 5, 4, 6}, {1, 2, 3, 5, 6, 4},
+	 * 			{1, 2, 3, 6, 4, 5} and {1, 2, 3, 6, 5, 4} 
+	 * @param tab
+	 * @param index
+	 * @param n
+	 * @return
+	 */
+	public int checkMinimum(int[] tab, int index, int n){
+		
+		int result = Integer.MAX_VALUE;
+		
+		
+		
+		return result;
+	}
+}

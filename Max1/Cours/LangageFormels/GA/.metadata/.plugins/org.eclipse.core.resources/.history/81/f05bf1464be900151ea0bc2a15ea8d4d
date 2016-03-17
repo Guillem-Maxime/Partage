@@ -1,0 +1,125 @@
+
+public class Travel {
+	//ATTRIBUTES
+	
+	private int nbrTowns;
+	private int[] path;
+	
+	//METHODES
+	public Travel(int nT, int[] p){
+		this.nbrTowns = nT;
+		this.path = p;
+	}
+	
+	public int getNbrTowns(){
+		return(this.nbrTowns);
+	}
+	
+	public int[] getPath(){
+		return(this.path);
+	}
+	
+	
+	/**
+	 * Function that get the element of a certain index
+	 * @param index the index we want to get the element of
+	 * @return the element
+	 */
+	public int getElement(int index){
+		return(this.path[index]);
+	}
+	
+	
+	/**
+	 * Function that calculate the length of the travel given a certain map
+	 * @param map the given map
+	 * @return the length of this travel
+	 */
+	public int calculLength(Map map){
+		
+		int length = 0;
+		
+		for(int i = 0; i < this.nbrTowns - 1; i++){
+			
+			length += map.getRoads()[i][i+1]; 
+		}
+		
+		length += map.getRoads()[this.nbrTowns - 1][0]; //on boucle le chemin
+		
+		return length;
+	}
+	
+	
+	/**
+	 * Function that check if an element is in the travel
+	 * @param e the chosen element
+	 * @return true if the element is in the travel, false if not
+	 */
+	public boolean check(int e){
+		for(int i = 0; i < this.nbrTowns; i++){
+			if(this.path[i] == e){
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	
+	/**
+	 * Function that get the index of a certain element
+	 * @param e the element we look the index for
+	 * @return the index of this element
+	 */
+	public int indexOf(int e){
+		for(int i = 0; i < this.nbrTowns; i++){
+			if(this.path[i] == e){
+				return i;
+			}
+		}
+		System.out.println("error : value not found, return -1");
+		return -1;
+	}
+	
+	
+	/**
+	 * Function used to put an element to a certain place
+	 * @param e the element to put
+	 * @param index the index where the element have to be put
+	 */
+	public void setInt(int e, int index){
+		this.path[index] = e;
+	}
+	
+	
+	/**
+	 * function used in the mutation step to simulate the mutation
+	 * @param a position a 
+	 * @param b position b
+	 */
+	public void reverse(int a, int b){
+		if(a < b){
+			for(int i = 0; i < (b + a)/2 - a; i++){
+				this.path[a + i] = this.path[b - i];
+			}
+		}else{
+			for(int i = 0; i < (b + a)/2 - b; i++){
+				this.path[b + i] = this.path[a - i];
+			}
+		}
+	}
+	
+	
+	public void permut(int index){
+		
+		Travel travel = new Travel(this.nbrTowns, this.path);
+		
+		int tmp;
+		
+		if(index < travel.nbrTowns -1){
+			tmp = travel.path[index];
+			travel.path[index] = travel.path[index + 1];
+			travel.path[index + 1] = tmp;
+		}
+	}
+}

@@ -1,0 +1,199 @@
+import java.util.Random;
+
+
+public class GeneAlg {
+	//ATTRIBUTES
+	private Map map;
+	private int nbrTowns;
+	private int mutValue;
+	private int sizePop;
+	
+	private Population population;
+	private Couple couple;
+	
+	//METHODS
+	public GeneAlg(Map m, int nT, int mV, int sP){
+		this.map = m;
+		this.nbrTowns = nT;
+		this.mutValue = mV;
+		this.sizePop = sP;
+	}
+	
+	public Map getMap(){
+		return(this.map);
+	}
+	
+	public int getNbrTowns(){
+		return(this.nbrTowns);
+	}
+	
+	public int getMutVale(){
+		return(this.mutValue);
+	}
+	
+	public int getSizePop(){
+		return(this.sizePop);
+	}
+	
+	
+	public Population getPopulation(){
+		return(this.population);
+	}
+	
+	/**
+	 * Function that executes the Genetic Algorithm method
+	 */
+	public void geneticAlgorithm(){
+
+		initialization();
+	
+			//we must put a condition on the stopping of the evolution process
+		boolean evolution = true;
+		long counter = 0;
+		Random rand = new Random();
+	
+		while(evolution){  
+				//choose parents							: SELECTION
+			couple = chooseParents(this.population);
+		
+				//offspring = combination(parent1,parent2) 	: CROSSOVER
+			offspring = combination(couple);
+		
+				//optimize-local(offspring) 				: MUTATION
+			double x = rand.nextDouble();
+			if( x < mutValue){
+				offspring = optimizeLocal(offspring);
+			}
+		
+			//ifsuited(offspring)						: SURVIVAL OF THE FITTEST
+			if(offspring.calculLength(this.map) > population.shortest(this.map) * 2){
+				this.population.replace(this.population.getTravel(this.population.longestRoute(this.map)), offspring);
+			}
+		
+			//then replace optimum's searcher with most fitness by the offspring ??
+		
+		
+			//evolution condition
+			counter ++;
+			if(counter > 10000){
+				evolution = false;
+			}
+		}
+
+	}
+	
+	
+	public void initialization(){
+	
+			//the first path that our traveler will take
+		int[] firstPath = new int[this.nbrTowns];
+			//we fill it stupidly
+		for(int i = 0; i < this.nbrTowns; i++){
+			firstPath[i] = i+1;
+		}
+
+			//and put it in a Travel
+		Travel initialParent = new Travel(this.nbrTowns, firstPath);
+		
+		
+			//the population is a set of Travel
+		Travel[] popul = new Travel[this.sizePop];
+			//the first population is solely composed of stupid Travels 
+		for(int j = 0; j < this.sizePop; j++){
+			popul[j] = initialParent;
+		}
+		this.population = new Population(this.sizePop, popul);
+		
+
+	
+			//parents will be designed by a couple
+		Couple couple = new Couple(initialParent, initialParent);
+	
+			//the offspring which will be created on each loop
+		Travel offspring;
+	
+	}
+	
+	
+	/**
+	 * Function that chooses a couple of parents in the population
+	 * @param population the given population
+	 * @return a couple
+	 */
+	public static Couple chooseParents(Population population){
+		Travel p1;
+		Travel p2;
+		
+		p1 = population.randTr();
+		do{
+		p2 = population.randTr(); 	//Choose p2 at random in population
+		}while(p2 != p1);			//different from p1
+		
+		Couple couple = new Couple(p1,p2);
+		return couple;
+	}
+	
+	
+	/**
+	 * Function that create a Travel "child" from two parents with our chosen algorithm
+	 * @param couple the given couple of parents
+	 * @return a child Travel
+	 */
+	public static Travel combination(Couple couple){
+		
+		int nbrT = couple.getParent1().getNbrTowns();
+		int[] path = new int[nbrT];
+		for(int i = 0; i < nbrT; i++){
+			path[i] = 0;
+		}
+		
+		int nextIndex = 0;
+		
+		Travel offspring = new Travel(nbrT, path);
+		boolean cycle = false;
+		
+		for(int j = 0; j < nbrT; j++){
+				//First of all we check if we created a cycle
+			for(int k = 0; k < nbrT; k++){
+				if(offspring.getPath()[k] != 0 && offspring.check(couple.getParent2().getElement(k))){
+					cycle = true;
+				}
+				if(cycle){break;}
+			
+					//We copy the value of Parent1 in offspring at the nextIndex
+				offspring.setInt(couple.getParent1().getElement(nextIndex),nextIndex);
+					//We change the value of nextIndex, by the corresponding index of parent2
+				nextIndex = couple.getParent1().indexOf(couple.getParent2().getElement(nextIndex));
+				
+			}
+				
+		}
+		
+		//fill the rest of offspring with parent2
+		for(int l = 0; l < nbrT; l ++){
+			if(offspring.getElement(l) == 0){
+				offspring.setInt(couple.getParent2().getElement(l), l);
+			}
+		}
+		
+		return offspring;
+	}
+
+
+	/**
+	 * Function that simulate a mutation
+	 * @param t the Travel that mutates
+	 * @return the mutated Travel
+	 */
+	public static Travel optimizeLocal(Travel t){
+		Random iRand = new Random();
+		int a = iRand.nextInt(t.getNbrTowns());
+		int b;
+		do{
+			b = iRand.nextInt(t.getNbrTowns());
+		}while(a != b);
+			t.reverse(a, b);
+		
+		return t;
+	}
+}

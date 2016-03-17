@@ -1,0 +1,16 @@
+
+public class Main {
+	public static void main(String[] args){
+		
+		boolean evolution = true;
+		
+		while(evolution){ //definir les conditions d'évolution 
+			//choose parents 							: SELECTION
+			//offspring = combination(parent1,parent2) 	: CROSSOVER
+			//optimize-local(offspring) 				: MUTATION
+			//ifsuited(offspring)						:SURVIVAL OF THE FITTEST
+			//then replace optimum's searcher with most fitness by the offspring (???)
+			
+		}
+	}
+}

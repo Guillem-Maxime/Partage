@@ -1,0 +1,28 @@
+
+public class Travel {
+	//ATTRIBUTES
+	private String path;
+	
+	//METHODES
+	public String getPath(){
+		return(this.path);
+	}
+	
+	public int calculLength(Map map){
+		
+		int length = 0;
+		int a;
+		int b;
+		
+		for(int i = 0; i < this.path.length() - 1; i++){
+			a = Integer.parseInt(this.path[i]);
+			b = Integer.parseInt(this.path[i + 1]);
+			
+			
+			length += 
+		}
+		
+		
+		return 0;
+	}
+}

@@ -1,0 +1,101 @@
+import java.util.Random;
+
+
+public class GeneAlg {
+	//ATTRIBUTES
+	private Map map;
+	private Population population;
+	
+	//METHODS
+	public GeneAlg(Map m, Population p){
+		this.map = m;
+		this.population = p;
+	}
+	
+	public Map getMap(){
+		return(this.map);
+	}
+	
+	public Population getPopulation(){
+		return(this.population);
+	}
+	
+	
+	/**
+	 * Function that executes the Genetic Algorithm method
+	 */
+	public void GeneticAlgorithm(int numberTowns, int mutValue){
+		
+			//the first path that our traveler will take
+		int[] firstPath = new int[numberTowns];
+			//we fill it stupidly
+		for(int i = 0; i < numberTowns; i++){
+			firstPath[i] = i+1;
+		}
+	
+			//and put it in a Travel
+		Travel initialParent = new Travel(numberTowns, firstPath);
+		
+			//parents will be designed by a couple
+		Couple couple = new Couple(initialParent, initialParent);
+		
+			//the offspring which will be created on each loop (and not the punk band)
+		Travel offspring;
+	
+	
+			//we must put a condition on the stopping of the evolution process
+		boolean evolution = true;
+		long counter = 0;
+		Random rand = new Random();
+	
+		while(evolution){  
+				//choose parents							: SELECTION
+			couple = chooseParents(this.population);
+		
+				//offspring = combination(parent1,parent2) 	: CROSSOVER
+			offspring = combination(couple);
+		
+				//optimize-local(offspring) 				: MUTATION
+			double x = rand.nextDouble();
+			if( x < mutValue){
+				offspring = optimizeLocal(offspring);
+			}
+		
+			//ifsuited(offspring)						: SURVIVAL OF THE FITTEST
+			if(offspring.calculLength(this.map) > population.shortest(this.map) * 2){
+				this.population.replace(this.population.getTravel(this.population.longestRoute(this.map)), offspring);
+			}
+		
+			//then replace optimum's searcher with most fitness by the offspring ??
+		
+		
+			//evolution condition
+			counter ++;
+			if(counter > 10000){
+				evolution = false;
+			}
+		}
+
+	}
+	
+	
+	/**
+	 * Function that chooses a couple of parents in the population
+	 * @param population the given population
+	 * @return a couple
+	 */
+	public static Couple chooseParents(Population population){
+		Travel p1;
+		Travel p2;
+		
+		p1 = population.randTr();
+		do{
+		p2 = population.randTr(); 	//Choose p2 at random in population
+		}while(p2 != p1);			//different from p1
+		
+		Couple couple = new Couple(p1,p2);
+		return couple;
+	}
+	
+	
+}

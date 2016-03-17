@@ -1,0 +1,12 @@
+import java.util.ArrayList;
+
+
+public class Tree {
+	//ATTRIBUTES
+	private ArrayList<ArrayList<int[]>> tree;
+	
+	//METHODS
+	public Tree(){
+		this.tree = new ArrayList<ArrayList<>>;
+	}
+}
