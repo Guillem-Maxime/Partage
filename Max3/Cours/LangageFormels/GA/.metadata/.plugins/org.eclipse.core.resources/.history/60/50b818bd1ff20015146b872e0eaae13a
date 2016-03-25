@@ -1,0 +1,172 @@
+import java.util.Random;
+
+
+public class Main {
+	public static void main(String[] args){
+		
+		//INITIALIZATION
+		
+			//number of towns in our country
+		int numberTowns = 10;
+			//the value of the mutation rate
+		double mutValue = 0.7;
+			//The population of travels we will take
+		int pop = 25;
+			//the lengths between the roads in our country
+		int[][] country = new int[numberTowns][numberTowns];
+			//we fill our country with random values
+		fillRoads(country, numberTowns);
+			
+		
+			//we create a map that we fill with our country
+		Map map = new Map(numberTowns);
+		map.fillRoads(country);
+		
+		//TEST UNITAIRES
+		//test de fillRoads
+		System.out.println("test de la fonction : fillRoads");
+		String line = "| ";
+		for(int i = 0; i < numberTowns; i ++){
+			for(int j = 0; j < numberTowns; j++){
+				line += country[i][j] + " | ";
+			}
+			System.out.println(line);
+			line = "| ";
+		}
+		
+		//Test des fonctions de map
+		//test de map.fillRoads()
+		int[][] testTab2 = new int[10][10];
+		Map testMap = new Map(10);
+		
+		for(int i = 0; i < numberTowns; i ++){
+			for(int j = 0; j < numberTowns; j++){
+				if(i == j){testTab2[i][j] = Integer.MAX_VALUE;}
+				else{testTab2[i][j] = i;}
+			}
+		}
+		
+		for(int i = 0; i < numberTowns; i ++){
+			for(int j = 0; j < numberTowns; j++){
+				testTab2[j][i] = testTab2[i][j];
+			}
+		}
+		
+		System.out.println("test de la fonction : map.fillRoads");
+		testMap.fillRoads(testTab2);
+		line = "| ";
+		for(int i = 0; i < numberTowns; i ++){
+			for(int j = 0; j < map.getNbrTowns(); j++){
+				line += map.getRoads()[i][j] + " | ";
+			}
+			System.out.println(line);
+			line = "| ";
+		}
+		
+		//test des fonction de Travel
+		
+		
+		int[] testTab = new int[10];
+		for(int i = 0; i < 10; i ++){
+			testTab[i] = i+1;
+		}
+		Travel testTravel = new Travel(10, testTab);
+		
+		//test de getElement
+		System.out.println("test de la fonction : Travel.getElement");
+		System.out.println("réponse attendue : 6");
+		System.out.println(testTravel.getElement(6));
+		
+		//test de CalculLength
+		System.out.println("test de la fonction : Travel.calculLength");
+		System.out.println("réponse attendue : 55");
+		System.out.println(testTravel.calculLength(map));
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		/*
+		BruteFor bruteFor = new BruteFor(map, numberTowns);
+		System.out.println("Methode de la Brute Force.");
+		long bfResult = bruteFor.bruteForce();
+		
+		
+		
+		GeneAlg geneAlg = new GeneAlg(map, numberTowns, mutValue, pop);
+		
+
+		System.out.println("Algorithme génétique pour 100 étapes.");
+		geneAlg.geneticAlgorithm(100, 1);
+		
+		
+		
+		System.out.println("Algorithme génétique pour 10000 étapes.");
+		geneAlg.geneticAlgorithm(10000, 1);
+		System.out.println("Algorithme génétique pour 25000 étapes.");
+		geneAlg.geneticAlgorithm(25000, 1);
+		System.out.println("Algorithme génétique pour 50000 étapes.");
+		geneAlg.geneticAlgorithm(50000, 1);
+		System.out.println("Algorithme génétique pour 100000 étapes.");
+		geneAlg.geneticAlgorithm(100000, 1);
+		
+		
+		System.out.println("Algorithme génétique pour atteindre 4 fois la valeur trouvée par Brute Force.");
+		geneAlg.geneticAlgorithm(bfResult * 4, 2);
+		System.out.println("Algorithme génétique pour atteindre 3 fois la valeur trouvée par Brute Force.");
+		geneAlg.geneticAlgorithm(bfResult * 3, 2);
+		System.out.println("Algorithme génétique pour atteindre 2 fois la valeur trouvée par Brute Force.");
+		geneAlg.geneticAlgorithm(bfResult * 2, 2);
+		System.out.println("Algorithme génétique pour atteindre la valeur trouvée par Brute Force.");
+		geneAlg.geneticAlgorithm(bfResult, 2);
+		*/
+		
+		System.out.println("End.");
+		
+	}
+	
+	/**
+	 * Function that fill a tab with random values
+	 * @param tab the tab to fill
+	 * @param n the size of the tab (tab is a square matrix)
+	 */
+	public static void fillRoads(int[][] tab, int n){
+		
+		Random rand = new Random();
+		int a;
+		
+		for(int i = 0; i < n; i++){
+			for(int j = 0; j < n; j++){
+				if(i != j){
+					a = rand.nextInt(10) + 1;
+					tab[i][j] = a; 
+				}else{
+					tab[i][j] = Integer.MAX_VALUE;
+				}
+				
+				//debug 
+				//System.out.println("roads["+ i +"]["+ j +"] = " + tab[i][j]);
+			}
+		}
+		
+		for(int i = 0; i < n; i++){
+			for(int j = 0; j < n; j++){
+				tab[j][i] = tab[i][j];
+			}
+		}
+		
+	}
+
+	
+}

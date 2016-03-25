@@ -40,12 +40,10 @@ public class Travel {
 		long length = 0;
 		
 		for(int i = 0; i < this.nbrTowns - 1; i++){
-			
-			length += map.getRoads()[i][i+1]; 
+			length += map.getRoads()[this.path[i] - 1 ][this.path[i+1] - 1];
 		}
 		
 		length += map.getRoads()[this.nbrTowns - 1][0]; //on boucle le chemin
-		
 		return length;
 	}
 	
@@ -98,15 +96,29 @@ public class Travel {
 	 * @param b position b
 	 */
 	public void reverse(int a, int b){
+		
+		int x;
+		int y;
+
+		
 		if(a < b){
-			for(int i = 0; i < (b + a)/2 - a; i++){
-				this.path[a + i] = this.path[b - i];
-			}
+			x = a;
+			y = b;
 		}else{
-			for(int i = 0; i < (b + a)/2 - b; i++){
-				this.path[b + i] = this.path[a - i];
-			}
+			x = b;
+			y = a;
 		}
+		
+		int[] tab = new int[y-x+1];
+
+		for(int i = 0; i < y-x+1; i++){
+			tab[i] = this.path[x+i];
+		}
+		
+		for(int i = 0; i < y-x+1; i++){
+			this.path[x + i] = tab[y-x+1-i -1];
+		}
+		
 	}
 	
 	public String toString(){

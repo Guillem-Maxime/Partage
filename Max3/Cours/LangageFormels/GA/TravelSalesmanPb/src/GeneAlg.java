@@ -103,12 +103,12 @@ public class GeneAlg {
 			if(version == 1){
 				if(counter >= value){
 					evolution = false;
-					System.out.println("la solution trouvÃ©e a Ã©tÃ© atteinte aprÃ¨s " + value + " Ã©tapes.");
+					System.out.println("la solution trouvée a été atteinte après " + value + " étapes.");
 				}
 			}else if(version == 2){
 				if(this.population.lengthShortest(map) <= value){
 					evolution = false;
-					System.out.println("la solution trouvÃ©e a Ã©tÃ© atteinte en : " + counter + " Ã©tapes.");
+					System.out.println("la solution trouvée a été atteinte en : " + counter + " étapes.");
 				}
 			}
 			
